@@ -25,7 +25,8 @@ This project is developed as part of the CS644 Web Programming course at the Ara
 - **Frontend**:
 
   - HTML5
-  - CSS3 (without Bootstrap)
+  - CSS3
+  - Bootstrap
   - JavaScript
 
 - **Backend**:

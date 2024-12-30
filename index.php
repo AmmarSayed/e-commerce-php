@@ -67,11 +67,11 @@ include("./head.php");
         </div>
 
         <!-- fourth child -->
-        <div class="row ">
+        <div class="container-fluid mx-auto row p-0">
             <!-- start of row -->
-            <div class="col-md-10">
+            <div class="col-10 p-0">
                 <!--Start all products Array -->
-                <div class="row container">
+                <div class="row mx-auto">
 
                     <!-- fetch all products -->
                     <?php
@@ -83,7 +83,7 @@ include("./head.php");
             <!-- end of row -->
 
             <!-- Start Side Nav -->
-            <div class="col-md-2 bg-secondary p-0">
+            <div class="col-2 bg-secondary p-0">
                 <!-- Start Brands Display -->
                 <ul class="navbar-nav mr-auto me-auto text-center">
                     <!-- Start first item -->

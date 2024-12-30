@@ -1,15 +1,14 @@
-<?php include("./includes/connect.php");
-include("./functions/common_function.php");
-include("./head.php");
-?>
-
-
-
 <link rel="stylesheet" href="./style.css">
 <title>Ecommerce Website</title>
 </head>
 
+<?php
+include("./functions/common_function.php");
+include("./head.php");
+?>
+
 <body class="d-flex flex-column h-100">
+
     <div class="container-fluid p-0">
         <!-- Start Navbar-->
         <nav class=" navbar navbar-expand-lg navbar-light border bg-light">
@@ -34,10 +33,14 @@ include("./head.php");
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping"></i><sup>1</sup></a>
+                        <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping"></i>
+                            <?php
+                            get_cart_items_count()
+                            ?>
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Total Price:100/-</a>
+                        <a class="nav-link" href="#">Total Price: <?php print_r(get_cart_total() . "$")  ?></a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
@@ -47,7 +50,6 @@ include("./head.php");
             </div>
         </nav>
         <!-- End Navbar-->
-
 
         <!-- second child -->
         <nav class="my-3 alert-secondary">
@@ -89,9 +91,7 @@ include("./head.php");
             <!-- end of row -->
 
             <!-- Start Side Nav -->
-
             <div class="col-2 p-0">
-
 
                 <!-- Start Brands Display -->
                 <div class="accordion" id="accordionExample">
@@ -114,7 +114,6 @@ include("./head.php");
                         </div>
                     </div>
                     <!-- End Brands Display -->
-
 
                     <!-- Start Category Display -->
                     <div class="accordion" id="accordionExample">

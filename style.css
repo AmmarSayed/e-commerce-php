@@ -1,0 +1,62 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img.logo {
+  width: 7%;
+  height: 7%;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+}
+
+.admin-img {
+  width: 100px;
+  object-fit: contain;
+}
+
+.card:hover {
+  transition: transform ease-in-out 500ms;
+  transform: scale(1.02);
+}
+
+/* Style the file input */
+input[type="file"] {
+  display: block;
+  width: 75%;
+  border-top-right-radius: 5px; /* Add rounded corners to the top-right */
+  border-bottom-right-radius: 5px; /* Add rounded corners to the bottom-right */
+  background-color: #f9f9f9; /* Light background */
+  color: #333; /* Text color */
+  font-size: 16px;
+  cursor: pointer;
+  padding: 6px 12px;
+  border: 1px solid #ced4da;
+}
+
+/* Style the label */
+label[for^="product_image"] {
+  margin: 0;
+  display: block;
+  font-size: inherit;
+  color: #555;
+  background-color: #e9ecef;
+  width: 25%;
+  border-top-left-radius: 5px; /* Add rounded corners to the top-left */
+  border-bottom-left-radius: 5px; /* Add rounded corners to the bottom-left */
+  text-align: left;
+  border: 1px solid #ced4da;
+  border-right: none;
+  border-end-start-radius: none;
+  padding: 6px 12px;
+  padding-right: 0px;
+}
+
+.input-group {
+  padding: 5px;
+}

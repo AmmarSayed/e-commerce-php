@@ -33,7 +33,7 @@ function get_products()
     // check number of returned rows
     $rows_counter = mysqli_num_rows($result_query);
     if ($rows_counter == 0) {
-        echo "<h2 class='text-center alert-success flex-grow-1'>No Available products</>";
+        echo "<h2 class='py-3 text-center alert-success flex-grow-1'>No Available products</h2>";
     }
 
     while ($row = mysqli_fetch_assoc($result_query)) {
@@ -51,7 +51,7 @@ function get_products()
                 <div class='card-body'>
                     <h5 class='card-title'>$product_title</h5>
                     <p class='card-text'>$product_description</p>
-                    <a href='#' class='btn btn-info'>Add to cart</a>
+                    <a href='index.php?add_to_cart=$product_id' class='btn btn-info'>Add to cart</a>
                     <a href='index.php?product_id=$product_id' class='btn btn-secondary'>View more</a>
                 </div>
             </div>
@@ -70,15 +70,16 @@ function get_single_product()
     // check number of returned rows
     $rows_counter = mysqli_num_rows($result_query);
     if ($rows_counter == 0) {
-        echo "<h2 class='text-center alert-success flex-grow-1'>No Available products</>";
+        echo "<h2 class='py-3 text-center alert-success flex-grow-1'>No Available products</h2>";
     }
 
     while ($row = mysqli_fetch_assoc($result_query)) {
+        $product_id = $row['pr_id'];
         $product_title = $row['pr_title'];
         $product_description = $row['pr_description'];
         // $product_keywords = $row['pr_keywords'];
-        $product_category = $row['cat_id'];
-        $product_brand = $row['br_id'];
+        // $product_category = $row['cat_id'];
+        // $product_brand = $row['br_id'];
         $product_price = $row['pr_price'];
         // $product_status = $row['status'];
         $product_image1 = $row['pr_img1'];
@@ -86,37 +87,37 @@ function get_single_product()
         $product_image3 = $row['pr_img3'];
 
         echo "
-    <!-- Start single product -->
-    <div class='col-md-4 mb-2'>
-        <!-- Card Start -->
-        <div class='card single-product'>
-            <img src='./admin/product_images/$product_image1' class='card-img-top' alt='$product_title'>
-            <div class='card-body'>
-                <h5 class='card-title'>$product_title</h5>
-                <p class='card-text'>$product_description</p>
-                <a href='#' class='btn btn-info btn-block'>Add to cart</a>
+        <!-- Start single product -->
+        <div class='col-md-4 mb-2'>
+            <!-- Card Start -->
+            <div class='card single-product'>
+                <img src='./admin/product_images/$product_image1' class='card-img-top' alt='$product_title'>
+                <div class='card-body'>
+                    <h5 class='card-title'>$product_title</h5>
+                    <p class='card-text'>$product_description</p>
+                    <a href='index.php?add_to_cart=$product_id' class='btn btn-info btn-block'>Add to cart</a>
+                </div>
             </div>
+            <!-- Card end -->
         </div>
-        <!-- Card end -->
-    </div>
-    <!-- End single product -->
+        <!-- End single product -->
 
-    <!-- Start related images -->
-    <div class='col-md-8'>
-        <div class='row'>
-            <div class='col-md-12'>
-                <h4 class='text-center text-info mb-5'>Product Images</h4>
-            </div>
-            <div class='col-md-6'>
-             <img src='./admin/product_images/$product_image2' class='card-img-top' alt='$product_title'>
-            </div>
-            <div class='col-md-6'>
-             <img src='./admin/product_images/$product_image3' class='card-img-top' alt='$product_title'>
+        <!-- Start related images -->
+        <div class='col-md-8'>
+            <div class='row'>
+                <div class='col-md-12'>
+                    <h4 class='text-center text-info mb-5'>Product Images</h4>
+                </div>
+                <div class='col-md-6'>
+                <img src='./admin/product_images/$product_image2' class='card-img-top' alt='$product_title'>
+                </div>
+                <div class='col-md-6'>
+                <img src='./admin/product_images/$product_image3' class='card-img-top' alt='$product_title'>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- End related images -->
-    ";
+        <!-- End related images -->
+        ";
     }
 }
 
@@ -148,8 +149,56 @@ function getCategories()
         $category_id = $row_data['cat_id'];
         echo "
             <li class='list-group-item'>
-                <a href='index.php?brand=$category_id'> $category_title </a>
+                <a href='index.php?category=$category_id'> $category_title </a>
             </li>
         ";
+    }
+}
+
+function handle_add_to_cart()
+{
+
+    global $con;
+
+    ///////////////////
+    // To be changed
+    ///////////////////
+    $user_id = 4;
+    $ip_address = $_SERVER['REMOTE_ADDR'];
+    ///////////////////
+    ///////////////////
+    ///////////////////
+
+    if (isset($_GET['add_to_cart'])) {
+
+        $product_id = $_GET['add_to_cart'];
+
+        $select_query = "SELECT * FROM cart WHERE user_id = $user_id AND pr_id=$product_id";
+        $result_query = mysqli_query($con, $select_query);
+        $rows_counter = mysqli_num_rows($result_query);
+        // $rows_counter = $result_query->num_rows
+
+        if ($rows_counter > 0) {
+            // Redirect to same tap
+            header("Location: index.php?success=0");
+            exit();
+        } else {
+            // insert data to cart
+            $insert_query = "INSERT INTO `cart` (user_id,pr_id,qty,ip_address)
+            VALUES ($user_id,$product_id,1,'$ip_address');";
+            $query_result = mysqli_query($con, $insert_query);
+            header("Location: index.php?success=1");
+            exit();
+        }
+    }
+
+    // Display success message if redirected
+    if (isset($_GET['success'])) {
+        if ($_GET['success'] == 1) {
+            echo "<h2 class='text-center alert-success flex-grow-1'>Item added to cart successfully!</h2>";
+        }
+        if ($_GET['success'] == 0) {
+            echo "<h2 class='text-center alert-danger flex-grow-1'>Item already added to cart</h2>";
+        }
     }
 }

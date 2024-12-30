@@ -20,6 +20,14 @@ function getProducts()
     }
 
     $result_query = mysqli_query($con, $select_query);
+
+    // check number of returned rows
+    $rows_counter = mysqli_num_rows($result_query);
+    if ($rows_counter == 0) {
+        echo "<h2 class='text-center alert-success flex-grow-1'>No Available products</>";
+    }
+
+
     while ($row = mysqli_fetch_assoc($result_query)) {
         $product_title = $row['pr_title'];
         $product_description = $row['pr_description'];

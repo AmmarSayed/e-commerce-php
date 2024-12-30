@@ -5,8 +5,20 @@ include("./includes/connect.php");
 function getProducts()
 {
     global $con;
-    // fetching products
-    $select_query = "SELECT * FROM products ORDER BY pr_title LIMIT 0,9";
+    $select_query = '';
+
+    // Check for filters
+    if (isset($_GET['category'])) {
+        // fetching 
+        $cat_id = $_GET['category'];
+        $select_query = "SELECT * FROM products WHERE cat_id = $cat_id ORDER BY pr_title";
+    } else if (isset($_GET['brand'])) {
+        $br_id = $_GET['brand'];
+        $select_query = "SELECT * FROM products WHERE br_id = $br_id ORDER BY pr_title";
+    } else {
+        $select_query = "SELECT * FROM products ORDER BY pr_title LIMIT 0,9";
+    }
+
     $result_query = mysqli_query($con, $select_query);
     while ($row = mysqli_fetch_assoc($result_query)) {
         $product_title = $row['pr_title'];

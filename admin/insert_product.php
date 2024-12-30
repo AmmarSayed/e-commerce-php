@@ -71,12 +71,15 @@ include("../head.php");
 </head>
 
 <body class="d-flex flex-column h-100 bg-light">
-    <div class="container mt-3">
-        <h1 class="text-center "> Insert Product </h1>
-
+    <div class="container mx-auto mt-3">
+        <div class="row mb-3">
+            <button class="btn btn-primary text-white"><a href="index.php">
+                    <p class="text-white m-0">Back to home page</p>
+                </a></button>
+            <h1 class="text-center  ml-5 "> Insert Product </h1>
+        </div>
         <!-- Start Form -->
         <!-- the attribute  formenctype="multipart/form-data" to allow image uploads to the server-->
-
         <form action="" method="post" enctype="multipart/form-data">
             <!-- start title field -->
             <div class="form-outline mb-4 mx-auto w-75">

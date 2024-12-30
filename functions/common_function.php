@@ -163,7 +163,7 @@ function handle_add_to_cart()
     ///////////////////
     // To be changed
     ///////////////////
-    $user_id = 4;
+    $user_id = 1;
     $ip_address = $_SERVER['REMOTE_ADDR'];
     ///////////////////
     ///////////////////

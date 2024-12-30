@@ -35,7 +35,7 @@ include("../head.php")
 
         <!-- Start Third Child -->
         <div class="row m-0">
-            <div class="col-md-12 bg-secondary p-3 d-flex align-items-center ">
+            <div class="col-md-12 bg-light p-3 border d-flex align-items-center ">
 
                 <!-- start first Child -->
                 <div class="p-3">
@@ -46,16 +46,16 @@ include("../head.php")
 
                 <!-- start second Child -->
                 <div class="text-center d-flex flex-wrap justify-content-around w-100">
-                    <button class="mb-3"><a href="insert_product.php" class="nav-link text-light bg-info my-1">Insert product</a></button>
-                    <button class="mb-3"><a href="" class="nav-link text-light bg-info my-1">View products</a></button>
-                    <button class="mb-3"><a href="index.php?insert_category" class="nav-link text-light bg-info my-1">Insert Category</a></button>
-                    <button class="mb-3"><a href="" class="nav-link text-light bg-info my-1">View Categories</a></button>
-                    <button class="mb-3"><a href="index.php?insert_brand" class="nav-link text-light bg-info my-1">Insert Brand</a></button>
-                    <button class="mb-3"><a href="" class="nav-link text-light bg-info my-1">View Brands</a></button>
-                    <button class="mb-3"><a href="" class="nav-link text-light bg-info my-1">All orders</a></button>
-                    <button class="mb-3"><a href="" class="nav-link text-light bg-info my-1">All payments</a></button>
-                    <button class="mb-3"><a href="" class="nav-link text-light bg-info my-1">List users</a></button>
-                    <button class="mb-3"><a href="" class="nav-link text-light bg-info my-1">Logout</a></button>
+                    <button class="btn btn-primary mb-3"><a href="insert_product.php" class="nav-link text-light ">Insert product</a></button>
+                    <button class="btn btn-primary mb-3"><a href="" class="nav-link text-light ">View products</a></button>
+                    <button class="btn btn-primary mb-3"><a href="index.php?insert_category" class="nav-link text-light ">Insert Category</a></button>
+                    <button class="btn btn-primary mb-3"><a href="" class="nav-link text-light ">View Categories</a></button>
+                    <button class="btn btn-primary mb-3"><a href="index.php?insert_brand" class="nav-link text-light ">Insert Brand</a></button>
+                    <button class="btn btn-primary mb-3"><a href="" class="nav-link text-light ">View Brands</a></button>
+                    <button class="btn btn-primary mb-3"><a href="" class="nav-link text-light ">All orders</a></button>
+                    <button class="btn btn-primary mb-3"><a href="" class="nav-link text-light ">All payments</a></button>
+                    <button class="btn btn-primary mb-3"><a href="" class="nav-link text-light ">List users</a></button>
+                    <button class="btn btn-primary mb-3"><a href="" class="nav-link text-light ">Logout</a></button>
                 </div>
                 <!-- end second Child -->
 

@@ -39,8 +39,8 @@ include("./head.php");
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search with keyword" aria-label="Search" name="keywords">
+                    <input type="submit" value="Search" class="btn btn-outline-dark">
                 </form>
             </div>
         </nav>
@@ -48,7 +48,7 @@ include("./head.php");
 
 
         <!-- second child -->
-        <nav class=" alert-secondary">
+        <nav class="my-3 alert-secondary">
             <ul class="nav justify-content-end me-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Welcome Guest</a>
@@ -75,7 +75,8 @@ include("./head.php");
 
                     <!-- fetch all products -->
                     <?php
-                    getProducts();
+                    if (isset($_GET['product_id'])) get_single_product();
+                    else get_products();
                     ?>
                 </div>
                 <!-- End all products Array-->
@@ -83,42 +84,61 @@ include("./head.php");
             <!-- end of row -->
 
             <!-- Start Side Nav -->
-            <div class="col-2 bg-secondary p-0">
+
+            <div class="col-2 p-0">
+
+
                 <!-- Start Brands Display -->
-                <ul class="navbar-nav mr-auto me-auto text-center">
-                    <!-- Start first item -->
-                    <li class="nav-item bg-info">
-                        <a href="#" class="nav-link text-light">
-                            <h4>Delivery Brands</h4>
-                        </a>
-                    </li>
-                    <?php
-                    getBrands();
-                    ?>
-                </ul>
-                <!-- End Brands Display -->
+                <div class="accordion" id="accordionExample">
+                    <div class="list">
+                        <div class="" id="headingOne">
+                            <h2 class="mb-0">
+                                <div class="bg-primary text-light text-center" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                                    <p class="p-2 m-0">Brands</p>
+                                </div>
+                            </h2>
+                        </div>
+                        <div id="collapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="">
+                                <ul class="list-group">
+                                    <?php
+                                    getBrands();
+                                    ?>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Brands Display -->
 
-                <!-- Start Category Display -->
-                <ul class="navbar-nav mr-auto me-auto text-center">
 
-                    <!-- Start first item -->
-                    <li class="nav-item bg-info">
-                        <a href="#" class="nav-link text-light">
-                            <h4>Categories</h4>
-                        </a>
-                    </li>
-                    <!-- End first item -->
-                    <?php
-                    getCategories();
-                    ?>
-                </ul>
-                <!-- End Category Display -->
+                    <!-- Start Category Display -->
+                    <div class="accordion" id="accordionExample">
+                        <div class=" list">
+                            <div class="" id="headingOne">
+                                <h2 class="mb-0">
+                                    <div class=" bg-primary text-light text-center" type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
+                                        <p class="p-2 m-0">Categories</p>
+                                    </div>
+                                </h2>
+                            </div>
+                            <div id="collapse2" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div class="">
+                                    <ul class="list-group">
+                                        <?php
+                                        getCategories();
+                                        ?>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Category Display -->
+                    </div>
+                </div>
+                <!-- End Side Nav -->
             </div>
-            <!-- End Side Nav -->
         </div>
-    </div>
 
-    <?php include("./footer.php") ?>
+        <?php include("./footer.php") ?>
 </body>
 
 </html>

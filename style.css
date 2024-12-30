@@ -20,7 +20,7 @@ img.logo {
   object-fit: contain;
 }
 
-.card:hover {
+.card:not(.single-product):hover {
   transition: transform ease-in-out 500ms;
   transform: scale(1.02);
 }

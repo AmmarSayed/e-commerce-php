@@ -17,7 +17,7 @@ include("./head.php");
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav mr-auto ">
                     <li class="nav-item active">
                         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                     </li>
@@ -48,8 +48,8 @@ include("./head.php");
 
 
         <!-- second child -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
-            <ul class="navbar-nav me-auto">
+        <nav class=" alert-secondary">
+            <ul class="nav justify-content-end me-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Welcome Guest</a>
                 </li>
@@ -61,10 +61,10 @@ include("./head.php");
         </nav>
 
         <!-- third child -->
-        <div class="bg-light">
+        <!-- <div class="alert alert-light">
             <h3 class="text-center">Hidden Store</h3>
             <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, excepturi.</p>
-        </div>
+        </div> -->
 
         <!-- fourth child -->
         <div class="container-fluid mx-auto row p-0">

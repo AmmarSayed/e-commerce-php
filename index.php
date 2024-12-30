@@ -33,7 +33,7 @@ include("./head.php");
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping"></i>
+                        <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-shopping"></i>
                             <?php
                             get_cart_items_count()
                             ?>

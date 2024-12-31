@@ -60,14 +60,10 @@ include("./head.php");
 
             </ul>
         </nav>
-
-        <!-- third child -->
-        <!-- <div class="alert alert-light">
-            <h3 class="text-center">Hidden Store</h3>
-            <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, excepturi.</p>
-        </div> -->
-
-        <!-- fourth child -->
+        <?php
+        handle_delete_cart_item();
+        handle_empty_cart();
+        ?>
         <div class="container">
             <div class="row">
                 <table class="table table-bordered text-center">
@@ -77,34 +73,30 @@ include("./head.php");
                             <th>Image</th>
                             <th>Qty</th>
                             <th>Price</th>
-                            <th>Remove</th>
-                            <th>Operations</th>
+                            <th></th>
                         </tr>
                     </thead>
-
                     <tbody>
-                        <tr>
-                            <td>Apple</td>
-                            <td><img src="./images/10.png" alt=""></td>
-                            <td><input type="number" name="" id="" value="1"></td>
-                            <td>9000</td>
-                            <td><input type="checkbox" name="" id=""></td>
-                            <td>
-                                <p>update</p>
-                                <p>remove</p>
-                            </td>
-                        </tr>
+                        <!-- php code to display dynamic data -->
+                        <?php
+                        get_cart_items();
+                        ?>
                     </tbody>
                 </table>
                 <!-- subtotal -->
-                <div class="d-flex mb-3">
-                    <h4 class="px-3">Sub-total: <strong>2000</strong></h4>
-                    <a href="index.php"><button class="btn btn-secondary">continue shopping</button></a>
-                    <a href="#"><button class="mx-3 btn btn-primary">checkout</button></a>
+                <div class="row col-12 align-items-center mb-3">
+                    <div class="d-flex  align-items-center">
+                        <h4 class="px-3 m-0">Sub-total: <strong><?php echo get_cart_total() . "$" ?></strong></h4>
+                        <a href="index.php"><button class="btn btn-success">Continue Shopping</button></a>
+                        <a href="#"><button class="mx-3 btn btn-primary">Checkout</button></a>
+                    </div>
+                    <a href='cart.php?empty_cart' class="ml-auto">
+                        <button class='btn btn-danger'>
+                            <i class='fa fa-trash'></i>Clear Cart</button>
+                    </a>
                 </div>
             </div>
         </div>
-
     </div>
 
     <?php include("./footer.php") ?>

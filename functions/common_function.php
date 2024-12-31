@@ -187,8 +187,8 @@ function handle_add_to_cart()
 
         $select_query = "SELECT * FROM cart WHERE user_id = $user_id AND pr_id=$product_id";
         $result_query = mysqli_query($con, $select_query);
-        $rows_counter = mysqli_num_rows($result_query);
-        // $rows_counter = $result_query->num_rows
+        // $rows_counter = mysqli_num_rows($result_query);
+        $rows_counter = $result_query->num_rows;
 
         if ($rows_counter > 0) {
             // Redirect to same tap
@@ -207,6 +207,7 @@ function handle_add_to_cart()
     // Display success message if redirected for 3 seconds and disappear after 3 seconds
     if (isset($_GET['success'])) {
         $success = $_GET['success'];
+
         if ($success == 1) {
             echo "<div class='alert flex-grow-1 alert-success alert-dismissible fade show' role='alert'>
             <strong>Success!</strong> Product added to cart successfully.
@@ -280,4 +281,108 @@ function get_cart_total()
         $total += $product_qty * $product_price;
     }
     return $total;
+}
+
+
+function get_cart_items()
+{
+    global $con;
+    ///////////////////
+    // To be changed
+    ///////////////////
+    global $user_id;
+    global $ip_address;
+    ///////////////////
+    ///////////////////
+
+    $select_query = "SELECT * FROM cart WHERE user_id = $user_id AND ip_address='$ip_address'";
+    $result_query = mysqli_query($con, $select_query);
+    $rows_count = $result_query->num_rows;
+
+    if ($rows_count > 0) {
+        while ($row = mysqli_fetch_array($result_query)) {
+            $product_id = $row['pr_id'];
+            $product_qty = $row['qty'];
+            $select_product = "SELECT * FROM products WHERE pr_id = $product_id";
+            $result_product = mysqli_query($con, $select_product);
+            $row_product = mysqli_fetch_array($result_product);
+            $product_title = $row_product['pr_title'];
+            $product_image = $row_product['pr_img1'];
+            $product_price = $row_product['pr_price'];
+
+            echo "
+            <tr>
+                <td>$product_title</td>
+                <td><img class='cart-img' src='./admin/product_images/$product_image' alt=''></td>
+                <td><input type='number' name='qty'  value='$product_qty'></td>
+                <td>$product_price$</td>
+                <td>
+                    <a href='cart.php?delete=$product_id' class='btn btn-danger'><i class='fa fa-trash'></i></a>
+                </td>
+            </tr>";
+        }
+        return;
+    }
+
+    echo "<h2 class='py-3 text-center alert-success flex-grow-1'>No Available products in cart</h2>";
+}
+
+
+// delete item from cart but alert the user first before deleting
+// in case of accidental deletion of an item go back to the cart
+function handle_delete_cart_item()
+{
+    global $con;
+    global $user_id;
+    global $ip_address;
+
+    if (isset($_GET['delete'])) {
+        $product_id = $_GET['delete'];
+
+        echo "
+        <script>
+            if (confirm('Are you sure you want to delete this item from your cart?')) {
+                window.location.href = 'cart.php?confirm_delete=$product_id';
+            } else {
+                window.location.href = 'cart.php';
+            }
+        </script>
+        ";
+    }
+
+    if (isset($_GET['confirm_delete'])) {
+        $product_id = $_GET['confirm_delete'];
+        $delete_query = "DELETE FROM cart WHERE user_id = $user_id AND pr_id = $product_id AND ip_address = '$ip_address'";
+        mysqli_query($con, $delete_query);
+        header("Location: cart.php");
+        exit();
+    }
+}
+
+// empty cart but alert the user first before emptying somthing like "are you sure you want to empty your cart?"
+
+function handle_empty_cart()
+{
+    global $con;
+    global $user_id;
+    global $ip_address;
+
+    if (isset($_GET['empty_cart'])) {
+        echo "
+        <script>
+            if (confirm('Are you sure you want to empty your cart?')) {
+                window.location.href = 'cart.php?confirm_empty';
+            } else {
+                window.location.href = 'cart.php';
+            }
+        </script>
+        ";
+    }
+
+    if (isset($_GET['confirm_empty'])) {
+        $delete_query = "DELETE FROM cart WHERE user_id = $user_id AND ip_address = '$ip_address'";
+        mysqli_query($con, $delete_query);
+        header("Location: cart.php");
+        exit();
+    }
 }

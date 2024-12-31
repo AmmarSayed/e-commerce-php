@@ -60,3 +60,9 @@ label[for^="product_image"] {
 .input-group {
   padding: 5px;
 }
+
+.cart-img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}

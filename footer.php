@@ -1,7 +1,7 @@
 <footer>
     <!-- last child -->
     <div class="footer border bg-light footer mt-5 py-3 text-center">
-        <p class="m-0">All rights reserved ©- Designed by Ammar Sayed</p>
+        <p class="m-0">All rights reserved © - Designed by Ammar Sayed</p>
     </div>
 
     <!-- bootstrap js link -->

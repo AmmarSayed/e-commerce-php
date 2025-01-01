@@ -1,11 +1,26 @@
-<link rel="stylesheet" href="./style.css">
-<title>Ecommerce Website</title>
-</head>
-
 <?php
+session_start();
 include("./functions/common_function.php");
-include("./head.php");
 ?>
+
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- bootstrap file -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <!-- font awesome link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <link rel="stylesheet" href="./style.css">
+
+    <title>Ecommerce Website</title>
+</head>
 
 <body class="d-flex flex-column h-100">
 
@@ -22,11 +37,18 @@ include("./head.php");
                     <li class="nav-item active">
                         <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Register</a>
+                        <a class="nav-link" href="./users/register.php">
+                            <?php
+
+                            if (isset($_SESSION['usr_name'])) {
+                                echo "";
+                            } else {
+                                echo "Register";
+                            }
+                            ?>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>
@@ -54,21 +76,39 @@ include("./head.php");
         <!-- second child -->
         <nav class="my-3 alert-secondary">
             <ul class="nav justify-content-end me-auto">
+
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Welcome Guest</a>
+                    <a class="nav-link" href="#">Welcome
+                        <?php
+                        if (isset($_SESSION['usr_name'])) {
+                            echo $_SESSION['usr_name'];
+                        } else {
+                            echo "Guest";
+                        }
+                        ?>
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
+
+                    <?php
+                    if (isset($_SESSION['usr_name'])) {
+                        echo "<a class='nav-link' href='users/logout.php'>Logout</a>";
+                    } else {
+                        echo "<a class='nav-link' href='users/login.php'>Login</a>";
+                    }
+                    ?>
                 </li>
 
             </ul>
         </nav>
 
         <!-- third child -->
-        <!-- <div class="alert alert-light">
+        <!-- 
+        <div class="alert alert-light">
             <h3 class="text-center">Hidden Store</h3>
             <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, excepturi.</p>
-        </div> -->
+        </div> 
+        -->
 
         <!-- fourth child -->
         <div class="container-fluid mx-auto row p-0">

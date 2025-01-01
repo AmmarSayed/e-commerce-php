@@ -4,7 +4,7 @@
 /////////////////////
 
 // include the database
-include("./includes/connect.php");
+include(__DIR__ . "/../includes/connect.php");
 
 //////////////////////
 // Global area
@@ -317,7 +317,7 @@ function get_cart_items()
                 <td><input type='number' name='qty'  value='$product_qty'></td>
                 <td>$product_price$</td>
                 <td>
-                    <a href='cart.php?delete=$product_id' class='btn btn-danger'><i class='fa fa-trash'></i></a>
+                    <a href='cart.php?delete=$product_id' class='btn btn-danger p-2'><i class='fa fa-trash'></i></a>
                 </td>
             </tr>";
         }

@@ -1,9 +1,8 @@
 <?php
 
-
 try {
     // Attempt to connect to the database
-    $con = mysqli_connect('localhost', 'root', '', 'MyStore'); // Intentionally using an incorrect database name
+    $con = mysqli_connect('localhost', 'root', '', 'MyStore');
 } catch (mysqli_sql_exception $e) {
     // Log the error and display a custom message
     error_log("Database connection failed: " . $e->getMessage());

@@ -62,12 +62,22 @@ if (isset($_GET['success']) && $_GET['success'] == 0) {
     echo "<script>alert('Error moving one or more files, please fill in all data.')</script>";
 }
 
-include("../head.php");
 ?>
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel='stylesheet' href='../style.css'>
-<title>Insert Products-Admin Dashboard</title>
+    <!-- bootstrap file -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <!-- font awesome link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+
+    <link rel='stylesheet' href='../style.css'>
+    <title>Insert Products-Admin Dashboard</title>
 </head>
 
 <body class="d-flex flex-column h-100 bg-light">

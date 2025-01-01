@@ -83,9 +83,9 @@ include(__DIR__ . "/../functions/common_function.php");
 
                     <?php
                     if (isset($_SESSION['usr_name'])) {
-                        echo "<a class='nav-link' href='users/logout.php'>Logout</a>";
+                        echo "<a class='nav-link' href='logout.php'>Logout</a>";
                     } else {
-                        echo "<a class='nav-link' href='users/login.php'>Login</a>";
+                        echo "<a class='nav-link' href='login.php'>Login</a>";
                     }
                     ?>
                 </li>
@@ -105,7 +105,7 @@ include(__DIR__ . "/../functions/common_function.php");
             if (!isset($_SESSION['usr_name'])) {
                 include("login.php");
             } else {
-                include("../payment.php");
+                include("./payment.php");
             }
             ?>
         </div>

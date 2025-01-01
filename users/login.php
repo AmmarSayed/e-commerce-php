@@ -1,5 +1,5 @@
 <?php
-session_start();
+@session_start();
 include("../includes/connect.php");
 ?>
 
@@ -75,6 +75,7 @@ if (isset($_POST['user_login'])) {
 
     if ($row) {
         $_SESSION['usr_name'] = $row['usr_name'];
+        $_SESSION['usr_id'] = $row['usr_id'];
 
         // verify password
         if (password_verify($usr_password, $row['usr_password'])) {

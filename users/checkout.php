@@ -69,7 +69,7 @@ include(__DIR__ . "/../functions/common_function.php");
             <ul class="nav justify-content-end me-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Welcome
+                    <a class="nav-link" href="./profile.php">Welcome
                         <?php
                         if (isset($_SESSION['usr_name'])) {
                             echo $_SESSION['usr_name'];

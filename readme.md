@@ -20,6 +20,14 @@ This project is developed as part of the CS644 Web Programming course at the Ara
 
 - **Prevention of Duplicate Submissions**: Implements measures to prevent duplicate entries when the page is refreshed after form submission.
 
+- **Product Listing**: Displays a list of all products with their details and images.
+
+- **Product Search**: Allows users to search for products by title, category, or brand.
+
+- **Product Editing**: Administrators can edit existing product details and images.
+
+- **Product Deletion**: Administrators can delete products from the database.
+
 ## Technologies Used
 
 - **Frontend**:
@@ -61,7 +69,7 @@ This project is developed as part of the CS644 Web Programming course at the Ara
      <?php
      $con = mysqli_connect("localhost", "username", "password", "database_name");
      if (!$con) {
-         die("Connection failed: " . mysqli_connect_error());
+           die("Connection failed: " . mysqli_connect_error());
      }
      ?>
      ```
@@ -81,7 +89,7 @@ This project is developed as part of the CS644 Web Programming course at the Ara
 
 1. **Access the Product Insertion Page**:
 
-   - Navigate to `http://localhost/product-management-system/insert_product.php`.
+   - Navigate to `http://localhost/product-management-system/admin.php`.
 
 2. **Fill Out the Form**:
 
@@ -94,7 +102,23 @@ This project is developed as part of the CS644 Web Programming course at the Ara
    - A success message will be displayed upon successful insertion.
 
 4. **Prevent Duplicate Submissions**:
+
    - After submission, the page redirects to itself with a success flag to prevent duplicate entries if the page is refreshed.
+
+5. **View Products as user**:
+
+   - Navigate to `http://localhost/product-management-system/index.php` to see the list of all products.
+
+6. **Search Products**:
+
+   - Use the search functionality on the product listing page to find products by title, category, or brand.
+
+7. **Edit Products**:
+
+   - Click the "Edit" button next to a product to update its details and images.
+
+8. **Delete Products**:
+   - Click the "Delete" button next to a product to remove it from the database.
 
 ## Code Highlights
 
@@ -109,15 +133,15 @@ This project is developed as part of the CS644 Web Programming course at the Ara
 
   ```php
   if ($result_query) {
-      header("Location: " . $_SERVER['PHP_SELF'] . "?success=1");
-      exit();
+        header("Location: " . $_SERVER['PHP_SELF'] . "?success=1");
+        exit();
   }
   ```
 
 - **Displaying Success Message**:
   ```php
   if (isset($_GET['success']) && $_GET['success'] == 1) {
-      echo "<script>alert('Product inserted successfully!')</script>";
+        echo "<script>alert('Product inserted successfully!')</script>";
   }
   ```
 

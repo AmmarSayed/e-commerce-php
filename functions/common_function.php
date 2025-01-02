@@ -9,8 +9,19 @@ include(__DIR__ . "/../includes/connect.php");
 //////////////////////
 // Global area
 /////////////////////
-$user_id = 4;
-$ip_address = $_SERVER['REMOTE_ADDR'];
+
+$user_id = isset($_SESSION['usr_id']) ? $_SESSION['usr_id'] : null;
+
+//////////////////////
+// TEST 
+// IP 16 
+// IP 14 
+// null
+/////////////////////
+$ip_address = null;
+
+// get the user IP address
+$ip_address = $ip_address ? $ip_address : $_SERVER['REMOTE_ADDR'];
 
 //////////////////////
 // Functions
@@ -176,7 +187,6 @@ function handle_add_to_cart()
     ///////////////////
     // To be changed
     ///////////////////
-    global $user_id;
     global $ip_address;
     ///////////////////
     ///////////////////
@@ -185,7 +195,7 @@ function handle_add_to_cart()
 
         $product_id = $_GET['add_to_cart'];
 
-        $select_query = "SELECT * FROM cart WHERE user_id = $user_id AND pr_id=$product_id";
+        $select_query = "SELECT * FROM cart WHERE ip_address ='$ip_address' AND pr_id=$product_id";
         $result_query = mysqli_query($con, $select_query);
         // $rows_counter = mysqli_num_rows($result_query);
         $rows_counter = $result_query->num_rows;
@@ -196,8 +206,8 @@ function handle_add_to_cart()
             exit();
         } else {
             // insert data to cart
-            $insert_query = "INSERT INTO `cart` (user_id,pr_id,qty,ip_address)
-            VALUES ($user_id,$product_id,1,'$ip_address');";
+            $insert_query = "INSERT INTO `cart` (pr_id,qty,ip_address)
+            VALUES ($product_id,1,'$ip_address');";
             $query_result = mysqli_query($con, $insert_query);
             header("Location: index.php?success=1");
             exit();
@@ -238,12 +248,11 @@ function get_cart_items_count()
     ///////////////////
     // To be changed
     ///////////////////
-    global $user_id;
     global $ip_address;
     ///////////////////
     ///////////////////
 
-    $select_query = "SELECT * FROM cart WHERE user_id = $user_id AND ip_address='$ip_address'";
+    $select_query = "SELECT * FROM cart WHERE   ip_address='$ip_address'";
     $result_query = mysqli_query($con, $select_query);
     $rows_count = $result_query->num_rows;
 
@@ -266,13 +275,12 @@ function get_cart_total()
     ///////////////////
     // To be changed
     ///////////////////
-    global $user_id;
     global $ip_address;
     ///////////////////
     ///////////////////
 
     $total = 0;
-    $select_query = "SELECT * FROM cart WHERE user_id = $user_id AND ip_address='$ip_address'";
+    $select_query = "SELECT * FROM cart WHERE  ip_address='$ip_address'";
     $result_query = mysqli_query($con, $select_query) or die(mysqli_error($con));
     while ($row = mysqli_fetch_array($result_query)) {
         $product_id = $row['pr_id'];
@@ -290,12 +298,11 @@ function get_cart_items()
     ///////////////////
     // To be changed
     ///////////////////
-    global $user_id;
     global $ip_address;
     ///////////////////
     ///////////////////
 
-    $select_query = "SELECT * FROM cart WHERE user_id = $user_id AND ip_address='$ip_address'";
+    $select_query = "SELECT * FROM cart WHERE  ip_address='$ip_address'";
     $result_query = mysqli_query($con, $select_query);
     $rows_count = $result_query->num_rows;
 
@@ -309,15 +316,24 @@ function get_cart_items()
             $product_title = $row_product['pr_title'];
             $product_image = $row_product['pr_img1'];
             $product_price = $row_product['pr_price'];
+            $total = $product_qty * $product_price;
 
             echo "
             <tr>
                 <td>$product_title</td>
                 <td><img class='cart-img' src='./admin/product_images/$product_image' alt=''></td>
-                <td><input type='number' name='qty'  value='$product_qty'></td>
                 <td>$product_price$</td>
                 <td>
-                    <a href='cart.php?delete=$product_id' class='btn btn-danger p-2'><i class='fa fa-trash'></i></a>
+                    <form action='' method='post'>
+                        <input type='hidden' name='product_id' value='$product_id'>
+                        <input type='number' name='qty' value='$product_qty' min='1'>
+                        <button type='submit' name='update_quantity' class='btn btn-primary'>Update</button>
+                    </form>
+                </td>
+                <td>$product_price</td>
+                <td>$total</td>
+                <td>
+                    <a href='cart.php?delete=$product_id' class='btn btn-danger'>Delete</a>
                 </td>
             </tr>";
         }
@@ -328,12 +344,13 @@ function get_cart_items()
 }
 
 
+
+
 // delete item from cart but alert the user first before deleting
 // in case of accidental deletion of an item go back to the cart
 function handle_delete_cart_item()
 {
     global $con;
-    global $user_id;
     global $ip_address;
 
     if (isset($_GET['delete'])) {
@@ -352,7 +369,7 @@ function handle_delete_cart_item()
 
     if (isset($_GET['confirm_delete'])) {
         $product_id = $_GET['confirm_delete'];
-        $delete_query = "DELETE FROM cart WHERE user_id = $user_id AND pr_id = $product_id AND ip_address = '$ip_address'";
+        $delete_query = "DELETE FROM cart WHERE  pr_id = $product_id AND ip_address = '$ip_address'";
         mysqli_query($con, $delete_query);
         header("Location: cart.php");
         exit();
@@ -364,7 +381,6 @@ function handle_delete_cart_item()
 function handle_empty_cart()
 {
     global $con;
-    global $user_id;
     global $ip_address;
 
     if (isset($_GET['empty_cart'])) {
@@ -380,8 +396,26 @@ function handle_empty_cart()
     }
 
     if (isset($_GET['confirm_empty'])) {
-        $delete_query = "DELETE FROM cart WHERE user_id = $user_id AND ip_address = '$ip_address'";
+        $delete_query = "DELETE FROM cart WHERE  ip_address = '$ip_address'";
         mysqli_query($con, $delete_query);
+        header("Location: cart.php");
+        exit();
+    }
+}
+
+
+// handle update cart 
+function update_cart_quantity()
+{
+    global $con;
+    global $ip_address;
+
+    if (isset($_POST['update_quantity'])) {
+        $product_id = $_POST['product_id'];
+        $quantity = $_POST['qty'];
+
+        $update_query = "UPDATE cart SET qty = $quantity WHERE pr_id = $product_id AND ip_address = '$ip_address'";
+        mysqli_query($con, $update_query);
         header("Location: cart.php");
         exit();
     }

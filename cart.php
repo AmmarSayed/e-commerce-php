@@ -67,7 +67,7 @@ include("./functions/common_function.php");
             <ul class="nav justify-content-end me-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Welcome
+                    <a class="nav-link" href="./users/profile.php">Welcome
                         <?php
                         if (isset($_SESSION['usr_name'])) {
                             echo $_SESSION['usr_name'];
@@ -94,6 +94,7 @@ include("./functions/common_function.php");
         <?php
         handle_delete_cart_item();
         handle_empty_cart();
+        update_cart_quantity();
         ?>
         <div class="container">
             <div class="row">
@@ -104,6 +105,7 @@ include("./functions/common_function.php");
                             <th>Image</th>
                             <th>Qty</th>
                             <th>Price</th>
+                            <th>Sub-total</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -121,6 +123,8 @@ include("./functions/common_function.php");
                         <a href="index.php"><button class="btn btn-success">Continue Shopping</button></a>
                         <a href="./users/checkout.php"><button class="mx-3 btn btn-primary">Checkout</button></a>
                     </div>
+
+                    <!-- empty cart -->
                     <a href='cart.php?empty_cart' class="ml-auto">
                         <button class='btn btn-danger'>
                             <i class='fa fa-trash'></i> Clear Cart</button>

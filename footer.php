@@ -1,8 +1,6 @@
-<footer>
+<footer class="footer bg-light mt-auto py-3 text-center border-top">
     <!-- last child -->
-    <div class="footer border bg-light footer mt-5 py-3 text-center">
-        <p class="m-0">All rights reserved © - Designed by Ammar Sayed</p>
-    </div>
+    <p class="m-0">All rights reserved © - Designed by Ammar Sayed</p>
 
     <!-- bootstrap js link -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

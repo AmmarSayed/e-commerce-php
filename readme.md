@@ -69,7 +69,7 @@ This project is developed as part of the CS644 Web Programming course at the Ara
      <?php
      $con = mysqli_connect("localhost", "username", "password", "database_name");
      if (!$con) {
-           die("Connection failed: " . mysqli_connect_error());
+              die("Connection failed: " . mysqli_connect_error());
      }
      ?>
      ```
@@ -133,15 +133,15 @@ This project is developed as part of the CS644 Web Programming course at the Ara
 
   ```php
   if ($result_query) {
-        header("Location: " . $_SERVER['PHP_SELF'] . "?success=1");
-        exit();
+           header("Location: " . $_SERVER['PHP_SELF'] . "?success=1");
+           exit();
   }
   ```
 
 - **Displaying Success Message**:
   ```php
   if (isset($_GET['success']) && $_GET['success'] == 1) {
-        echo "<script>alert('Product inserted successfully!')</script>";
+           echo "<script>alert('Product inserted successfully!')</script>";
   }
   ```
 

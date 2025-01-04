@@ -29,6 +29,65 @@ if (isset($_POST['insert_brand'])) {
     </div>
     <div class="input-group w-10 m-auto">
 
-        <input type="submit" value="Insert Brand" name="insert_brand" class="bg-info form-control">
+        <input type="submit" value="Insert Brand" name="insert_brand" class="btn btn-success form-control">
     </div>
 </form>
+
+
+<?php $query = "SELECT * FROM brands";
+$result = mysqli_query($con, $query);
+?>
+
+<table class="table table-striped table-hover mt-5">
+    <tr>
+        <th>Brand ID</th>
+        <th>Brand Name</th>
+        <th>Actions</th>
+    </tr>
+    <?php
+    while ($row = mysqli_fetch_assoc($result)) {
+    ?>
+        <tr>
+            <td> <?php echo $row['br_id'] ?></td>
+            <td> <?php echo $row['br_title'] ?></td>
+            <td>
+                <a href="index.php?insert_brand&delete_br_id=<?php echo $row['br_id'] ?>">
+                    <button class="btn btn-danger">
+                        Delete
+                    </button>
+                </a>
+            </td>
+        </tr>
+
+    <?php
+    }
+    ?>
+</table>
+
+
+<?php
+
+
+if (isset($_GET['delete_br_id'])) {
+    $delete_id = $_GET['delete_br_id'];
+    // scipt alert to confirm delete action
+    echo "<script>
+    if(confirm('Are you sure you want to delete this brand?')){
+        window.location.href = 'index.php?insert_brand&confirm_delete_br_id=$delete_id';
+    }else{
+        window.location.href = 'index.php?insert_brand';
+    }
+    </script>";
+} elseif (isset($_GET['confirm_delete_br_id'])) {
+    $delete_id = $_GET['confirm_delete_br_id'];
+    $delete_query = "DELETE FROM brands WHERE br_id = $delete_id";
+    $res = mysqli_query($con, $delete_query);
+    if ($res) {
+        echo "<script>alert('Category deleted successfully')</script>";
+        echo "<script>window.open('index.php?insert_brand','_self')</script>";
+    }
+}
+
+$query = "SELECT * FROM brands";
+$result = mysqli_query($con, $query);
+?>

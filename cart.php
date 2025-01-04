@@ -106,7 +106,8 @@ include("./functions/common_function.php");
                             <th>Qty</th>
                             <th>Price</th>
                             <th>Sub-total</th>
-                            <th></th>
+                            <th>Total</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>

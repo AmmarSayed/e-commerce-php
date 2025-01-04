@@ -55,13 +55,11 @@
                 <!-- start second Child -->
                 <div class="text-center d-flex flex-wrap justify-content-around w-100">
                     <button class="btn btn-primary mb-3"><a href="insert_product.php" class="nav-link text-light ">Insert product</a></button>
-                    <button class="btn btn-primary mb-3"><a href="" class="nav-link text-light ">View products</a></button>
+                    <button class="btn btn-primary mb-3"><a href="index.php?view_products" class="nav-link text-light ">View products</a></button>
                     <button class="btn btn-primary mb-3"><a href="index.php?insert_category" class="nav-link text-light ">Insert Category</a></button>
-                    <button class="btn btn-primary mb-3"><a href="" class="nav-link text-light ">View Categories</a></button>
                     <button class="btn btn-primary mb-3"><a href="index.php?insert_brand" class="nav-link text-light ">Insert Brand</a></button>
-                    <button class="btn btn-primary mb-3"><a href="" class="nav-link text-light ">View Brands</a></button>
-                    <button class="btn btn-primary mb-3"><a href="" class="nav-link text-light ">All orders</a></button>
-                    <button class="btn btn-primary mb-3"><a href="" class="nav-link text-light ">All payments</a></button>
+                    <button class="btn btn-primary mb-3"><a href="index.php?view_all_orders" class="nav-link text-light ">All orders</a></button>
+                    <button class="btn btn-primary mb-3"><a href="index.php?view_all_payments" class="nav-link text-light ">All payments</a></button>
                     <button class="btn btn-primary mb-3"><a href="" class="nav-link text-light ">List users</a></button>
                     <button class="btn btn-primary mb-3"><a href="" class="nav-link text-light ">Logout</a></button>
                 </div>
@@ -77,13 +75,19 @@
         <?php
         if (isset($_GET["insert_category"])) include("insert_category.php");
         if (isset($_GET["insert_brand"])) include("insert_brand.php");
+        if (isset($_GET["view_products"])) include("view_products.php");
+
+        if (isset($_GET["view_all_orders"])) include("view_all_orders.php");
         ?>
     </div>
     <!-- End Table of Content-->
 
-    <?php
-    include("../footer.php")
-    ?>
+
 </body>
+
+<?php
+include("../footer.php")
+?>
+
 
 </html>

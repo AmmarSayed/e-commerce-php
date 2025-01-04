@@ -14,6 +14,8 @@ $stmt->bind_param("i", $order_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $result_items = null;
+
+session_start();
 ?>
 
 <!DOCTYPE html>

@@ -38,7 +38,9 @@ while ($row_cart = mysqli_fetch_array($result_cart)) {
 
     // insert the order details into the pending_orders table
     // usr_id	inv_number	pr_id	pr_qty	order_status
-    $insert_pending_order = "INSERT INTO pending_orders (usr_id, inv_number, pr_id, pr_qty, order_status) VALUES ('$user_id', '$inv_number', '$product_id', '$product_qty', '$status')";
+    $insert_pending_order = "INSERT INTO pending_orders 
+    (usr_id, inv_number, pr_id, pr_qty, order_status) VALUES 
+    ('$user_id', '$inv_number', '$product_id', '$product_qty', '$status')";
 
     mysqli_query($con, $insert_pending_order);
 }
